@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Office Assistant - No Uploads Needed!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .chat-message { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .gradient-bg { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .quick-btn:hover { transform: translateY(-1px); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-robot text-3xl"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold">Smart Office Assistant</h1>
+                        <p class="text-green-100">Pre-loaded & Ready to Use - No Uploads Needed!</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="text-right">
+                        <p class="text-sm text-green-100">Employee:</p>
+                        <p class="font-semibold" id="employeeName">John Doe</p>
+                    </div>
+                    <div id="statusIndicator" class="flex items-center space-x-2">
+                        <div class="w-3 h-3 bg-green-300 rounded-full animate-pulse"></div>
+                        <span class="text-sm">Ready</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            
+            <!-- Quick Actions Sidebar -->
+            <div class="lg:col-span-1 space-y-6">
+                
+                <!-- Employee Info -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-user text-blue-500 mr-2"></i>
+                        Your Profile
+                    </h3>
+                    <div class="space-y-2 text-sm">
+                        <div><strong>ID:</strong> <span id="empId">EMP001</span></div>
+                        <div><strong>Dept:</strong> <span id="empDept">Engineering</span></div>
+                        <div><strong>Position:</strong> <span id="empPosition">Senior Developer</span></div>
+                        <div><strong>Manager:</strong> <span id="empManager">Jane Smith</span></div>
+                    </div>
+                </div>
+
+                <!-- Leave Balance -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-calendar-alt text-green-500 mr-2"></i>
+                        Leave Balance
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Annual</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-semibold" id="annualLeave">18 days</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Sick</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm font-semibold" id="sickLeave">8 days</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Personal</span>
+                            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm font-semibold" id="personalLeave">4 days</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-bolt text-yellow-500 mr-2"></i>
+                        Quick Actions
+                    </h3>
+                    <div class="space-y-2">
+                        <button onclick="sendQuickMessage('I need sick leave tomorrow')" 
+                                class="w-full text-left p-3 rounded-lg bg-red-50 hover:bg-red-100 transition-colors quick-btn">
+                            <i class="fas fa-thermometer-half text-red-500 mr-2"></i>
+                            <span class="text-sm">Sick Leave Tomorrow</span>
+                        </button>
+                        <button onclick="sendQuickMessage('I want to take vacation next week')" 
+                                class="w-full text-left p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors quick-btn">
+                            <i class="fas fa-plane text-blue-500 mr-2"></i>
+                            <span class="text-sm">Vacation Next Week</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Chat Area -->
+            <div class="lg:col-span-3">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <!-- Chat Header -->
+                    <div class="bg-gray-50 px-6 py-4 border-b">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-robot text-white"></i>
+                                </div>
+                                <div>
+                                    <h2 class="font-semibold text-gray-800">Smart Office Assistant</h2>
+                                    <p class="text-sm text-gray-500">Pre-loaded Database Ready</p>
+                                </div>
+                            </div>
+                            <div class="text-right text-sm text-gray-500">
+                                <i class="fas fa-database mr-1"></i>
+                                Pre-loaded Database Ready
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Messages -->
+                    <div id="chatMessages" class="h-96 overflow-y-auto p-6 bg-gray-50">
+                        <!-- Welcome Message -->
+                        <div class="chat-message mb-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-robot text-white text-sm"></i>
+                                </div>
+                                <div class="bg-white rounded-lg p-4 shadow-sm max-w-md">
+                                    <div class="flex items-center mb-2">
+                                        <span class="text-green-600 font-semibold text-sm">🌟 Welcome to Smart Office Assistant!</span>
+                                    </div>
+                                    <p class="text-gray-700 text-sm mb-3">I'm pre-loaded with complete TechCorp knowledge - no uploads needed! I can help you with:</p>
+                                    <div class="space-y-1 text-sm">
+                                        <div class="text-orange-600">🏖️ <strong>Leave Requests:</strong> "I need sick leave tomorrow"</div>
+                                        <div class="text-blue-600">📋 <strong>Company Policies:</strong> "What's the remote work policy?"</div>
+                                        <div class="text-purple-600">👤 <strong>Employee Info:</strong> "Show my profile"</div>
+                                        <div class="text-green-600">💼 <strong>Benefits:</strong> "What benefits do we have?"</div>
+                                    </div>
+                                    <p class="text-green-600 font-medium text-sm mt-3">Just ask me anything in natural language!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input -->
+                    <div class="border-t p-4 bg-white">
+                        <form id="chatForm" class="flex space-x-3">
+                            <input 
+                                type="text" 
+                                id="messageInput" 
+                                placeholder="Ask me anything about leave, policies, or employee info..."
+                                class="flex-1 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                required
+                            >
+                            <button 
+                                type="submit" 
+                                id="sendButton"
+                                class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:opacity-50 flex items-center space-x-2"
+                            >
+                                <span>Send</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                        <div class="mt-2 flex flex-wrap gap-2">
+                            <button onclick="sendQuickMessage('I need sick leave tomorrow')" 
+                                    class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full hover:bg-green-200">
+                                I need sick leave tomorrow
+                            </button>
+                            <button onclick="sendQuickMessage('What is the remote work policy?')" 
+                                    class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full hover:bg-blue-200">
+                                Remote work policy?
+                            </button>
+                            <button onclick="sendQuickMessage('Show my profile')" 
+                                    class="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full hover:bg-purple-200">
+                                Show my profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed top-4 right-4 space-y-2 z-50"></div>
+
+    <script>
+        class SmartOfficeAssistant {
+            constructor() {
+                this.apiBase = 'http://localhost:8002/api/v1';
+                this.employeeId = 'EMP001';
+                this.isLoading = false;
+                
+                this.initializeEventListeners();
+                this.loadEmployeeInfo();
+            }
+
+            initializeEventListeners() {
+                document.getElementById('chatForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const message = document.getElementById('messageInput').value.trim();
+                    if (message && !this.isLoading) {
+                        this.sendMessage(message);
+                        document.getElementById('messageInput').value = '';
+                    }
+                });
+            }
+
+            async loadEmployeeInfo() {
+                try {
+                    const response = await fetch(`${this.apiBase}/employees/${this.employeeId}`);
+                    if (response.ok) {
+                        const employee = await response.json();
+                        document.getElementById('employeeName').textContent = employee.name;
+                        document.getElementById('empId').textContent = employee.id;
+                        document.getElementById('empDept').textContent = employee.department;
+                        document.getElementById('empPosition').textContent = employee.position;
+                        document.getElementById('empManager').textContent = employee.manager;
+                        
+                        const leave = employee.leave_balance;
+                        document.getElementById('annualLeave').textContent = `${leave.annual} days`;
+                        document.getElementById('sickLeave').textContent = `${leave.sick} days`;
+                        document.getElementById('personalLeave').textContent = `${leave.personal} days`;
+                    }
+                } catch (error) {
+                    console.error('Error loading employee info:', error);
+                }
+            }
+
+            async sendMessage(message) {
+                this.isLoading = true;
+                this.updateSendButton(true);
+                
+                // Add user message
+                this.addMessage(message, 'user');
+                
+                try {
+                    const response = await fetch(`${this.apiBase}/chat`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            message: message,
+                            employee_id: this.employeeId
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        setTimeout(() => {
+                            this.addMessage(data.response, 'assistant');
+                            this.updateSendButton(false);
+                        }, 1000);
+                    } else {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    setTimeout(() => {
+                        this.addMessage('Sorry, I encountered an error. Please make sure the server is running.', 'assistant');
+                        this.updateSendButton(false);
+                    }, 1000);
+                }
+            }
+
+            addMessage(message, sender) {
+                const chatMessages = document.getElementById('chatMessages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'chat-message mb-4';
+
+                if (sender === 'user') {
+                    messageDiv.innerHTML = `
+                        <div class="flex items-start space-x-3 justify-end">
+                            <div class="bg-green-600 text-white rounded-lg p-4 shadow-sm max-w-md">
+                                <p class="text-sm">${message}</p>
+                            </div>
+                            <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-user text-white text-sm"></i>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    messageDiv.innerHTML = `
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-robot text-white text-sm"></i>
+                            </div>
+                            <div class="bg-white rounded-lg p-4 shadow-sm max-w-md">
+                                <p class="text-gray-700 text-sm whitespace-pre-line">${message}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            updateSendButton(loading) {
+                const button = document.getElementById('sendButton');
+                this.isLoading = loading;
+                
+                if (loading) {
+                    button.innerHTML = '<span>Sending...</span><i class="fas fa-spinner fa-spin"></i>';
+                    button.disabled = true;
+                } else {
+                    button.innerHTML = '<span>Send</span><i class="fas fa-paper-plane"></i>';
+                    button.disabled = false;
+                }
+            }
+
+            showToast(message, type = 'info') {
+                const toast = document.createElement('div');
+                toast.className = `bg-${type === 'error' ? 'red' : 'green'}-500 text-white px-4 py-2 rounded-lg shadow-lg`;
+                toast.textContent = message;
+                
+                document.getElementById('toastContainer').appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.remove();
+                }, 3000);
+            }
+        }
+
+        // Global function for quick messages
+        function sendQuickMessage(message) {
+            document.getElementById('messageInput').value = message;
+            document.getElementById('chatForm').dispatchEvent(new Event('submit'));
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new SmartOfficeAssistant();
+        });
+    </script>
+</body>
+</html>
