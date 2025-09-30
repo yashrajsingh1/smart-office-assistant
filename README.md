@@ -1,4 +1,4 @@
-# Smart Office Assistant 🏢
+# Smart Office Assistant 
 
 An intelligent AI-powered workplace management system that provides instant employee support through natural language processing. Pre-loaded with comprehensive company knowledge base - no uploads needed!
 
@@ -7,18 +7,18 @@ An intelligent AI-powered workplace management system that provides instant empl
 ![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-## ✨ Features
+##  Features
 
-- 🤖 **AI-Powered Chat Interface** - Natural language processing for workplace queries
-- 👤 **Employee Management** - Pre-loaded employee database with profiles and information
-- 🏖️ **Leave Management** - Check balances, submit requests, and track time off
-- 📋 **Policy Information** - Instant access to company policies and procedures
-- 💼 **Benefits Information** - Complete benefits package details
-- 🏠 **Remote Work Support** - Work from home policies and guidelines
-- 📊 **Real-time Dashboard** - Employee profile and leave balance sidebar
-- 🚀 **Ready to Use** - No setup required, works immediately
+-  **AI-Powered Chat Interface** - Natural language processing for workplace queries
+-  **Employee Management** - Pre-loaded employee database with profiles and information
+-  **Leave Management** - Check balances, submit requests, and track time off
+-  **Policy Information** - Instant access to company policies and procedures
+-  **Benefits Information** - Complete benefits package details
+-  **Remote Work Support** - Work from home policies and guidelines
+-  **Real-time Dashboard** - Employee profile and leave balance sidebar
+-  **Ready to Use** - No setup required, works immediately
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Python 3.7 or higher
@@ -95,7 +95,7 @@ employee = requests.get('http://localhost:8002/api/v1/employees/EMP001')
 print(employee.json())
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 smart-office-assistant/
@@ -118,7 +118,7 @@ smart-office-assistant/
 | `/api/v1/employees/{id}` | GET | Get specific employee information |
 | `/api/v1/employees` | GET | List all employees and departments |
 
-## 🎯 Key Components
+##  Key Components
 
 ### Pre-loaded Employee Database
 - **EMP001**: John Doe (Engineering, Senior Developer)
@@ -145,7 +145,7 @@ smart-office-assistant/
 - **Documentation**: OpenAPI/Swagger auto-generated
 - **Server**: Uvicorn ASGI server
 
-## 🔄 Development
+##  Development
 
 ### Running in Development Mode
 ```bash
@@ -166,7 +166,7 @@ The server automatically reloads when you make code changes.
 - **Company Policies**: Modify `company_knowledge` with your policies
 - **Styling**: Customize CSS classes in the frontend
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -176,24 +176,24 @@ The server automatically reloads when you make code changes.
 6. Push to the branch (`git push origin feature/amazing-feature`)
 7. Open a Pull Request
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👨‍💻 Author
+##  Author
 
 **Yashraj Singh**
 - GitHub: [@yashrajsingh1](https://github.com/yashrajsingh1)
 - LinkedIn: [Yashraj Singh](https://linkedin.com/in/yashrajsingh1)
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Built with [FastAPI](https://fastapi.tiangolo.com/) for high-performance API development
 - Styled with [Tailwind CSS](https://tailwindcss.com/) for modern, responsive design
 - Icons from [Font Awesome](https://fontawesome.com/)
 - Inspired by modern workplace automation and employee experience needs
 
-## 🔮 Future Enhancements
+##  Future Enhancements
 
 - [ ] Integration with real HR systems
 - [ ] Multi-language support
@@ -205,6 +205,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Ready to revolutionize your workplace experience!** 🚀
+**Ready to revolutionize your workplace experience!** 
 
 *This project demonstrates modern AI application development with clean, maintainable code and professional documentation.*
